@@ -21,6 +21,7 @@ car5 = pygame.image.load("car5.png")
 grass = pygame.image.load("grass.jpg")
 strip1 = pygame.image.load("yellow_strip.png")
 strip2  = pygame.image.load("strip.png") 
+rekt = pygame.image.load("explosion.jpg")
 
 def bg():
     screen.blit(grass,(0,0))
@@ -49,7 +50,11 @@ def obstacle(obs_x, obs_y, obs):
     
     screen.blit(obs_pic, (obs_x, obs_y))
 
- 
+def crashed():
+    screen.blit(rekt, ((width/2 - rekt.get_width()/2), height/2 -rekt.get_height()/2 ))
+    time.sleep(0.2)
+
+
 def car(x,y):
     screen.blit(car1,(x,y))
 
@@ -102,9 +107,10 @@ def main():
             obs = random.randrange(0,3)
 
         if (height - car1.get_height()) < obs_y + enemy_height:
-            print((height - car1.get_height()), obs_y, enemy_height )
-            time.sleep(0.2)
-            # if (width/2 - car1.get_width()/2 + x_change) > obs_x or car1.get_width() > obs_x:
+            # print((height - car1.get_height()), obs_y, enemy_height )
+            # time.sleep(0.2)
+            if (width/2 - car1.get_width()/2 + x_change) > obs_x and (width/2 - car1.get_width()/2 + x_change) < obs_x + 62 or (width/2 - car1.get_width()/2 + x_change)+car1.get_width() > obs_x and (width/2 - car1.get_width()/2 + x_change)+car1.get_width() < obs_x+62:
+                crashed()
 
         pygame.display.update()
 
