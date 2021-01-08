@@ -1,5 +1,6 @@
 import pygame
 import random
+import time
 
 pygame.init()
  
@@ -12,7 +13,6 @@ screen = pygame.display.set_mode((width, height))
 
 pygame.display.set_caption("CRASH_COURSE")
 
-#loading assets
 car1 = pygame.image.load("car1.png")
 car2 = pygame.image.load("car2.png")
 car3 = pygame.image.load("car3.png")
@@ -39,13 +39,15 @@ def yellow_stripes():
 def obstacle(obs_x, obs_y, obs):
 
     if obs == 0:
-        car2
+        obs_pic = car2
     elif obs == 1:
-        car3
+        obs_pic = car3
     elif obs == 2:
-        car4
+        obs_pic = car4
     elif obs == 3:
-        car5
+        obs_pic = car5
+    
+    screen.blit(obs_pic, (obs_x, obs_y))
 
  
 def car(x,y):
@@ -57,7 +59,10 @@ def main():
     obs_speed = 10
     obs_x = random.randrange((grass.get_width() + strip2.get_width()), (width - grass.get_width() - strip2.get_width() - 20))
     obs_y = -car2.get_height() - height
+    obs = 0
     y_change = 0
+    enemy_height = 142
+    enemy_width = 76
 
     while not crash:
         screen
@@ -83,17 +88,28 @@ def main():
         bg()
         yellow_stripes()
 
-        obs_y = (obs_speed/4)
+        obs_y -= (obs_speed/4)
 
-        # obstacle()
+        obstacle(obs_x, obs_y, obs)
 
+        obs_y += obs_speed
 
         car((width/2 - car1.get_width()/2 + x_change), (height - car1.get_height()))
-        opponent1()
+
+        if obs_y > height:
+            obs_y = 0 - enemy_height
+            obs_x = random.randrange((grass.get_width() + strip2.get_width()), (width - grass.get_width() - strip2.get_width() - 20)) 
+            obs = random.randrange(0,3)
+
+        if (height - car1.get_height()) < obs_y + enemy_height:
+            print((height - car1.get_height()), obs_y, enemy_height )
+            time.sleep(0.2)
+            # if (width/2 - car1.get_width()/2 + x_change) > obs_x or car1.get_width() > obs_x:
+
         pygame.display.update()
 
 
-        clock.tick(100)
+        clock.tick(144)
 
 main()
 pygame.quit()
