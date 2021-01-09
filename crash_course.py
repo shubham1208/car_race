@@ -33,6 +33,9 @@ def rules():
 
 def main_menu():
     run = True
+    pygame.mixer.init()
+    pygame.mixer.music.load("main_menu.ogg")
+    pygame.mixer.music.play(0)
     while run:    
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
