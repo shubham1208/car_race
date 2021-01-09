@@ -23,10 +23,13 @@ car5 = pygame.image.load("car5.png")
 grass = pygame.image.load("grass.jpg")
 strip1 = pygame.image.load("yellow_strip.png")
 strip2  = pygame.image.load("strip.png") 
-rekt = pygame.image.load("explosion.jpg")
+rekt = pygame.image.load("explosion.png")
 menu = pygame.image.load("bg1.jpg")
 pause = pygame.image.load("bg2.png")
 
+
+def rules():
+    pass
 
 def main_menu():
     run = True
@@ -64,6 +67,8 @@ def main_menu():
         
         if mouse[0] > (width/2 - 75) and mouse[0] < (width/2 + 75) and mouse[1] > (height/2) and mouse[1] < (height/2 + 50):
             pygame.draw.rect(screen, (255,255,0), (width/2 - 75, height/2, 150, 50))
+            if click == (1,0,0):
+                rules()
 
         btn2text = smalltext.render("RULES", True, (0,0,0))
         screen.blit(btn2text, ((width/2 - 42.5), (height/2 + 10)))
@@ -188,7 +193,7 @@ def main():
 
             if int(passed) % 10 == 0:
                 level += 1
-                obs_speed += 0.5
+                obs_speed += 0.75
                 font1 = pygame.font.SysFont(None, 60)
                 level_txt = font1.render("Level: " + str(level), True, (0,0,0))
                 screen.blit(level_txt, (width/2 - 60, 200))
