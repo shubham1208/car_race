@@ -24,7 +24,7 @@ grass = pygame.image.load("grass.jpg")
 strip1 = pygame.image.load("yellow_strip.png")
 strip2  = pygame.image.load("strip.png") 
 rekt = pygame.image.load("explosion.jpg")
-menu = pygame.image.load("bg1.jpg")
+menu = pygame.image.load("maybe_bg.gif")
 pause = pygame.image.load("bg2.png")
 
 
