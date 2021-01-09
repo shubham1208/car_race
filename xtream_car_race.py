@@ -1,6 +1,7 @@
 import pygame
 import random
 import time
+import os
 
 pygame.init()
 pygame.font.init()
@@ -13,7 +14,7 @@ screen = pygame.display.set_mode((width, height))
 
 # font = pygame.font.SysFont(None, size)
 
-pygame.display.set_caption("CRASH_COURSE")
+pygame.display.set_caption("Xtream car race")
 
 car1 = pygame.image.load("car1.png")
 car2 = pygame.image.load("car2.png")
@@ -26,10 +27,49 @@ strip2  = pygame.image.load("strip.png")
 rekt = pygame.image.load("explosion.png")
 menu = pygame.image.load("bg1.jpg")
 pause = pygame.image.load("bg2.png")
+title = pygame.image.load("title2.png")
+
+# def show_file( filename ):  
+#     if (sys.stdout.isatty()): 
+#         if (os.environ['PAGER']): 
+#             os.system('"{0}" "{1}"'.format( os.environ['PAGER'], filename )) 
+#         else: 
+#             os.system('less "{0}"'.format( filename )) 
+#     else: 
+#         if (os.environ['EDITOR']): 
+#             os.system('"{0}" "{1}"'.format( os.environ['EDITOR'], filename )) 
+#         else: 
+#             os.system('xdg-open "{0}" || gedit "{0}"'.format(filename)) 
 
 
 def rules():
-    pass
+    rule = True
+
+    while rule:    
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                rule = False
+                quit()
+                sys.exit()
+        font = pygame.font.SysFont(None, 60)
+        font1 = pygame.font.SysFont(None, 40)
+        rule_txt = font.render("Rules", True, (255,255,255))
+        movement = font.render("Movement:-", True, (150,150,150))
+        move_left = font1.render("Press left arrow key to move left.", True, (255,255,255))
+        move_right = font1.render("Press right arrow key to move right.", True, (255,255,255))
+        pause = font1.render("Press P to pause.", True, (255,255,255))
+        dont_crash = font1.render("Don't crash into other cars.", True, (255,255,255))
+        enjoy = font.render("Enjoy! :D", True, (255,255,255))
+        screen.blit(menu, (0,0))  
+        screen.blit(movement, (width/8 - 60, 90))
+        screen.blit(move_left, (width/8 - 60, 130))
+        screen.blit(move_right, (width/8 - 60, 160))
+        screen.blit(pause, (width/8 - 60, 190))
+        screen.blit(dont_crash, (width/8 - 60, 220))
+        screen.blit(enjoy, (width/2 - 60, 260))
+        screen.blit(rule_txt, (width/2 - 60, 50))
+        pygame.display.update()
 
 def main_menu():
     run = True
@@ -44,10 +84,10 @@ def main_menu():
                 sys.exit()
         screen.blit(menu, (0,0))    
         
-
-        font2 = pygame.font.SysFont(None,60)
-        menu_txt = font2.render("CRASH_COURSE", True, (255,255,255))
-        screen.blit(menu_txt, (width/2 - 140, 50))
+        screen.blit(title, (135, -50))
+        # font2 = pygame.font.SysFont(None,60)
+        # menu_txt = font2.render("XTREAM_RACE", True, (200,0,0))
+        # screen.blit(menu_txt, (width/2 - 140, 50))
         btn1 = pygame.draw.rect(screen, (0,119,0), (width/2 - 75, height/2 - 100, 150, 50))
         btn2 = pygame.draw.rect(screen, (200,200,0), (width/2 - 75, height/2, 150, 50))
         btn3 = pygame.draw.rect(screen, (119,0,0), (width/2 - 75, height/2 + 100, 150, 50))
