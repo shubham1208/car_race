@@ -1,7 +1,7 @@
 # car_race
 
 
-# Extreme_Carzzz
+# Extreme_Carzz
 This is a game made by Python and Pygame for the event ```pythagoras.```
 This is my take on the topic given to us: ```car race```
 In this game, we have to avoid crashing into the aproaching cars.
