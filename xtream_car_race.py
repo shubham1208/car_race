@@ -1,16 +1,16 @@
 '''
 to install pygame:
-type "pip install pygame" in CMD or terminal
+type "pip install pygame" in the CMD or terminal
 
-github link:
 https://github.com/shubham1208/car_race
 '''
 
 import pygame
 import random
 import time
-import os
+# import os
 
+crash = False 
 pygame.init()
 pygame.font.init()
 
@@ -19,8 +19,6 @@ width = 800
 height = 600
 
 screen = pygame.display.set_mode((width, height))
-
-# font = pygame.font.SysFont(None, size)
 
 pygame.display.set_caption("Xtream car race")
 
@@ -34,20 +32,9 @@ strip1 = pygame.image.load("yellow_strip.png")
 strip2  = pygame.image.load("strip.png") 
 rekt = pygame.image.load("explosion.png")
 menu = pygame.image.load("bg1.jpg")
-pause = pygame.image.load("bg2.png")
+pause = pygame.image.load("bg2.gif")
+pause_txt =  pygame.image.load("paused.png")
 title = pygame.image.load("title2.png")
-
-# def show_file( filename ):  
-#     if (sys.stdout.isatty()): 
-#         if (os.environ['PAGER']): 
-#             os.system('"{0}" "{1}"'.format( os.environ['PAGER'], filename )) 
-#         else: 
-#             os.system('less "{0}"'.format( filename )) 
-#     else: 
-#         if (os.environ['EDITOR']): 
-#             os.system('"{0}" "{1}"'.format( os.environ['EDITOR'], filename )) 
-#         else: 
-#             os.system('xdg-open "{0}" || gedit "{0}"'.format(filename)) 
 
 
 def rules():
@@ -62,6 +49,7 @@ def rules():
                 sys.exit()
         font = pygame.font.SysFont(None, 60)
         font1 = pygame.font.SysFont(None, 40)
+        
         rule_txt = font.render("Rules", True, (255,255,255))
         movement = font.render("Movement:-", True, (150,150,150))
         move_left = font1.render("Press left arrow key to move left.", True, (255,255,255))
@@ -69,6 +57,7 @@ def rules():
         pause = font1.render("Press P to pause.", True, (255,255,255))
         dont_crash = font1.render("Don't crash into other cars.", True, (255,255,255))
         enjoy = font.render("Enjoy! :D", True, (255,255,255))
+        
         screen.blit(menu, (0,0))  
         screen.blit(movement, (width/8 - 60, 90))
         screen.blit(move_left, (width/8 - 60, 130))
@@ -77,7 +66,24 @@ def rules():
         screen.blit(dont_crash, (width/8 - 60, 220))
         screen.blit(enjoy, (width/2 - 60, 260))
         screen.blit(rule_txt, (width/2 - 60, 50))
+        
+
+        back = pygame.draw.rect(screen, (200,100,10), (width - 150, 0, 150, 50))
+        
+        mouse1 = pygame.mouse.get_pos()
+        click1 = pygame.mouse.get_pressed()
+
+        if mouse1[0] > width - 150 and mouse1[0] < width and mouse1[1] > 0 and mouse1[1] < 50:
+            pygame.draw.rect(screen, (255,100,10), (width - 150, 0, 150, 50))    
+            
+            if click1 == (1,0,0):
+                main_menu()    
+    
+        back_txt = font1.render("<- BACK", True, (255,255,255))
+        screen.blit(back_txt, (width - 117, 20))
+
         pygame.display.update()
+
 
 def main_menu():
     run = True
@@ -93,9 +99,6 @@ def main_menu():
         screen.blit(menu, (0,0))    
         
         screen.blit(title, (135, -50))
-        # font2 = pygame.font.SysFont(None,60)
-        # menu_txt = font2.render("XTREAM_RACE", True, (200,0,0))
-        # screen.blit(menu_txt, (width/2 - 140, 50))
         btn1 = pygame.draw.rect(screen, (0,119,0), (width/2 - 75, height/2 - 100, 150, 50))
         btn2 = pygame.draw.rect(screen, (200,200,0), (width/2 - 75, height/2, 150, 50))
         btn3 = pygame.draw.rect(screen, (119,0,0), (width/2 - 75, height/2 + 100, 150, 50))
@@ -108,7 +111,6 @@ def main_menu():
 
         if mouse[0] > (width/2 - 75) and mouse[0] < (width/2 + 75) and mouse[1] > (height/2 - 100) and mouse[1] < (height/2 - 50):
             pygame.draw.rect(screen, (0,255,0), (width/2 - 75, height/2 - 100, 150, 50))
-            
             if click == (1,0,0):
                 main()
 
@@ -129,6 +131,7 @@ def main_menu():
 
             if click == (1,0,0):
                 exit()
+
         btn3text = smalltext.render("QUIT", True, (0,0,0))
         screen.blit(btn3text, ((width/2 - 32.5), (height/2 + 110)))
 
@@ -186,6 +189,54 @@ def score_board(passed, score):
 def car(x,y):
     screen.blit(car1,(x,y))
 
+def pause_screen():
+    paused = True
+    while paused:
+        screen.blit(pause, (0,0))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                paused = False
+        
+        a = pygame.font.SysFont("Ariel", 40)
+
+        screen.blit(pause_txt, (width/2 - pause_txt.get_width()/2, 50))
+
+        resume = pygame.draw.rect(screen, (200,0,0), (50, height- 100, 150, 50))
+        main_menu = pygame.draw.rect(screen, (200,200,0), (width/2 - 80, height- 100, 165, 50))
+        restart = pygame.draw.rect(screen, (0,0,200), (width - 200, height- 100, 150, 50))
+
+        restart_txt = a.render("Restart", True, (0,0,0))
+        main_menu_txt = a.render("Exit", True, (0,0,0))
+        resume_txt = a.render("Resume", True, (0,0,0))
+
+        m = pygame.mouse.get_pos()
+        c = pygame.mouse.get_pressed()
+          
+          
+        if m[0] > 50 and m[0] < 200 and m[1] > height-100 and m[1] < height-50:
+            pygame.draw.rect(screen, (255,0,0), (50, height - 100, 150, 50))
+            if c == (1,0,0):
+                paused = False
+        
+        if m[0] > width/2 - 80 and m[0] < width/2 - 80 + 165 and m[1] > height-100 and m[1] < height-50:
+            pygame.draw.rect(screen, (255,255,0), (width/2 - 80, height- 100, 165, 50))
+            if c == (1,0,0):
+                exit()
+
+        if m[0] > width - 200 and m[0] < width - 50 and m[1] > height-100 and m[1] < height-50:
+            pygame.draw.rect(screen, (0,0,255), (width - 200, height- 100, 150, 50))
+            if c == (1,0,0):
+                main()
+
+
+        screen.blit(resume_txt, (72, height - 87)) 
+        screen.blit(main_menu_txt, (width/2 - 25, height - 87))
+        screen.blit(restart_txt, (width - 170, height - 87))
+                
+        pygame.display.update()
+        
+
+
 def main():
     crash = False   
     x_change = 0
@@ -212,6 +263,9 @@ def main():
 
                 if event.key == pygame.K_RIGHT:
                     x_change += 30
+
+                if event.key == pygame.K_p:
+                    pause_screen()
             
 
         
@@ -257,6 +311,24 @@ def main():
                 crashed()
                 pygame.display.update()
 
+
+        font2 = pygame.font.SysFont(None, 40)
+        pause_btn = pygame.draw.rect(screen, (200,100,10), (width - 150, 0, 150, 50))
+        pause_btn_txt = font2.render("PAUSE", True, (255,255,255))
+
+        mouse2 =  pygame.mouse.get_pos()
+        click2 = pygame.mouse.get_pressed()
+
+        if mouse2[0] > width - 150 and mouse2[0] < width and mouse2[1] > 0 and mouse2[1] < 50:
+            pygame.draw.rect(screen, (255,100,10), (width - 150, 0, 150, 50))
+
+            if click2 == (1,0,0):
+                pause_screen()
+
+
+        screen.blit(pause_btn_txt, (width - 110, 15))
+        
+
         score_board(passed, score)
 
         pygame.display.update()
@@ -267,4 +339,3 @@ main_menu()
 main()
 pygame.quit()
 quit()
-
