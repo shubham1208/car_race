@@ -47,6 +47,14 @@ def rules():
                 rule = False
                 quit()
                 sys.exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_m:
+                    pygame.mixer.music.pause()
+
+                if event.key == pygame.K_n:
+                    pygame.mixer.music.unpause()
+                    
         font = pygame.font.SysFont(None, 60)
         font1 = pygame.font.SysFont(None, 40)
         
