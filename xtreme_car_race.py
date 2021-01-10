@@ -54,7 +54,7 @@ def rules():
 
                 if event.key == pygame.K_n:
                     pygame.mixer.music.unpause()
-                    
+
         font = pygame.font.SysFont(None, 60)
         font1 = pygame.font.SysFont(None, 40)
         
@@ -213,6 +213,13 @@ def pause_screen():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 paused = False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_m:
+                    pygame.mixer.music.pause()
+
+                if event.key == pygame.K_n:
+                    pygame.mixer.music.unpause()
         
         a = pygame.font.SysFont("Ariel", 40)
 
