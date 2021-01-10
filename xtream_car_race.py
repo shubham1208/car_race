@@ -1,3 +1,11 @@
+'''
+to install pygame:
+type "pip install pygame" in CMD or terminal
+
+github link:
+https://github.com/shubham1208/car_race
+'''
+
 import pygame
 import random
 import time
