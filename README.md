@@ -1,5 +1,6 @@
 # car_race
 
+<img src="https://github.com/shubham1208/car_race/blob/main/xtreme_carzz.gif" width="600" height="400" />
 
 # Extreme_Carzz
 This is a game made by Python and Pygame for the event ```pythagoras```.
