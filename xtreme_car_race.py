@@ -89,13 +89,19 @@ def main_menu():
     run = True
     pygame.mixer.init()
     pygame.mixer.music.load("main_menu.ogg")
-    pygame.mixer.music.play(0)
+    pygame.mixer.music.play(-1)
     while run:    
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
                 sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_m:
+                    pygame.mixer.music.pause()
+
+                if event.key == pygame.K_n:
+                    pygame.mixer.music.unpause()
         screen.blit(menu, (0,0))    
         
         screen.blit(title, (135, -50))
@@ -266,6 +272,12 @@ def main():
 
                 if event.key == pygame.K_p:
                     pause_screen()
+
+                if event.key == pygame.K_m:
+                    pygame.mixer.music.pause()
+
+                if event.key == pygame.K_n:
+                    pygame.mixer.music.unpause()
             
 
         
@@ -335,6 +347,7 @@ def main():
 
 
         clock.tick(144)
+
 main_menu()
 main()
 pygame.quit()
