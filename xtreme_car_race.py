@@ -57,6 +57,8 @@ def rules():
         pause = font1.render("Press P to pause.", True, (255,255,255))
         dont_crash = font1.render("Don't crash into other cars.", True, (255,255,255))
         enjoy = font.render("Enjoy! :D", True, (255,255,255))
+        pause_music = font1.render("Press m to pause music and n to unpause", True, (255,255,255))
+
         
         screen.blit(menu, (0,0))  
         screen.blit(movement, (width/8 - 60, 90))
@@ -64,7 +66,8 @@ def rules():
         screen.blit(move_right, (width/8 - 60, 160))
         screen.blit(pause, (width/8 - 60, 190))
         screen.blit(dont_crash, (width/8 - 60, 220))
-        screen.blit(enjoy, (width/2 - 60, 260))
+        screen.blit(pause_music, (width/8 - 60, 250))
+        screen.blit(enjoy, (width/2 - 60, 280))
         screen.blit(rule_txt, (width/2 - 60, 50))
         
 
