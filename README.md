@@ -12,6 +12,6 @@ To install pygame, type: `pip install pygame` into the command prompt or termina
 
 # Instructions
 - (This game requires the module pygame to be installed.)
-- To play the game using xtreme_car_race.py `git clone` all the dependancies into a directory with the source code.
+- To play the game using xtreme_car_race.py `git clone` all the dependencies into a directory with the source code.
 - There is an executable file provided to play the game without having python installed.
 - All the rules of the game is given in the `Rules` section in the game.
